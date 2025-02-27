@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
 import FriendList from './FriendList';
 import ChatBox from './ChatBox';
+import Login from './Login';
+import Register from './Register';
 import './App.css';
 
 const App = () => {
@@ -12,20 +15,37 @@ const App = () => {
   const [selectedFriend, setSelectedFriend] = useState(null);
 
   return (
-    <div className="app-container">
-      <Header />
-      <div className="main-content">
-        <Sidebar />
-        <Feed />
-        <Rightbar friends={friends} onSelectFriend={setSelectedFriend} />
+    <Router>
+      <div className="app-container">
+        <Header />
+        <nav>
+          <ul>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/register">Register</Link></li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={
+            <>
+              <div className="main-content">
+                <Sidebar />
+                <Feed />
+                <Rightbar friends={friends} onSelectFriend={setSelectedFriend} />
+              </div>
+              {selectedFriend && (
+                <ChatBox
+                  selectedFriend={selectedFriend}
+                  onClose={() => setSelectedFriend(null)}
+                />
+              )}
+            </>
+          } />
+        </Routes>
       </div>
-      {selectedFriend && (
-        <ChatBox 
-          selectedFriend={selectedFriend} 
-          onClose={() => setSelectedFriend(null)} 
-        />
-      )}
-    </div>
+    </Router>
   );
 };
 
@@ -60,9 +80,9 @@ const Feed = () => (
       <button>Post</button>
     </div>
     <div className="posts">
-      <Post 
-        title="Welcome to EduConnect!" 
-        content="This is our first post on the social network for educational institutions. Stay tuned for more updates!" 
+      <Post
+        title="Welcome to EduConnect!"
+        content="This is our first post on the social network for educational institutions. Stay tuned for more updates!"
       />
       {/* Additional posts can be mapped here */}
     </div>
