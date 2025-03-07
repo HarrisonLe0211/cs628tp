@@ -20,8 +20,9 @@ const App = () => {
         <Header />
         <nav>
           <ul>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
+          <li style={{fontWeight:"bold"}}><Link to="/register">Register</Link></li>
+            <li style={{fontWeight:"bold"}}><Link to="/login">Login</Link></li>
+
           </ul>
         </nav>
         <Routes>

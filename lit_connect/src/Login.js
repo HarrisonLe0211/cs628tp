@@ -17,22 +17,28 @@ const Login = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Login</h2>
+            <h2 style={{color: 'black', padding: '10px', fontSize:"35px" , font:"bold" }} >Login</h2>
+            <label style={{color: 'blue', padding: "10px", fontSize:"25px", fontStyle:"italic", fontWeight:'bold'}}>Username:  </label>
             <input
                 type="text"
-                placeholder="Username"
+
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
             />
+            <br></br>
+            <br></br>
+            <label style={{color: 'blue', padding: "10px" , fontSize:"25px" , fontStyle:"italic", fontWeight:"bold"}}>Password:  </label>
             <input
                 type="password"
-                placeholder="Password"
+
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
             />
-            <button type="submit">Login</button>
+            <br></br>
+            <br></br>
+            <button type="submit" style={{color: 'blue', padding:"10px", borderStyle: 'solid', borderRadius:'25px', fontWeight:'bold', fontSize:'25px'}}>Login</button>
         </form>
     );
 };
